@@ -1,13 +1,23 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { IndexedDbService } from './services/indexeddb.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'kentkartCase';
+  constructor(
+    private indexedDbService: IndexedDbService,
+    private authService: AuthService) {}
+
+  async ngOnInit() {
+    const companies = await this.indexedDbService.getAllFromTable('companies');
+    console.log('Companies:', companies);
+
+    const employees = await this.indexedDbService.getAllFromTable('employees');
+    console.log('Employees:', employees);
+  }
 }
