@@ -1,0 +1,14 @@
+<header class="main-header">
+    @if(!isHomePage){
+        <button class="back-button" (click)="goBack()">⬅ </button>
+    }
+    <div class="logo">
+      <img src="assets/logo.png" alt="Logo" />
+    </div>
+    @if(isLoggedIn | async){
+        <button (click)="logout()">Çıkış Yap</button>
+    } @else {
+        <button  (click)="signIn()">Giriş Yap</button>
+    }  
+</header>
+  
